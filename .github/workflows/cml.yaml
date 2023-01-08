@@ -1,0 +1,26 @@
+
+name: CML
+on: [push]
+jobs:
+  train-and-report:
+    needs: launch-runner
+    runs-on: [self-hosted, cml-gpu]
+    timeout-minutes: 50400 # 35 days
+    container:
+      image: docker://iterativeai/cml:0-dvc2-base1-gpu
+      options: --gpus all
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Train model
+        env:
+          REPO_TOKEN: ${{ secrets.GIT_YOLOV5_TOKEN }}
+        run: |
+          pip install -r requirements.txt
+          python train.py  # generate plot.png
+
+          # Create CML report
+          cat metrics.txt >> report.md
+          echo '![](./plot.png "Confusion Matrix")' >> report.md
+          cml comment create report.md

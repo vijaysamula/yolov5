@@ -1,4 +1,4 @@
 [core]
     remote = brainy
 ['remote "brainy"']
-    url = ../../dvc_brainy
+    url = /home/brainy/mlops_tut/dvc_brainy

@@ -1,0 +1,4 @@
+[core]
+    remote = brainy
+['remote "brainy"']
+    url = ../../dvc_brainy

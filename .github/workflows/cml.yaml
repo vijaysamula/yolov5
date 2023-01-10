@@ -11,4 +11,4 @@ jobs:
           git checkout plants_eterry
           dvc pull
           pip install -r requirements.txt
-          python3 train.py --img 640 --batch 16 --epochs 3 --data plants_iab.yaml --weights yolov5s.pt 
+          python3 train.py --img 640 --batch 16 --epochs 25 --data plants_iab.yaml --weights yolov5s.pt 
